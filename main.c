@@ -22,9 +22,9 @@ int main(int argc, char *argv[]) {
 	void *schedInfo;
 	int option;
 	int cnt;
-	
+	char str[500]; //파일에서 읽어온 한줄의 스케쥴을 저장할 변수  
+	 
 	//1. FILE pointer open & error handling
-	//fill code here ----
 	fp = fopen("schedule.dat", "r");
 	if (fp == NULL) 
 	{
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 	
 	
 	//2. read from the file
-	while ( /* fill code here -- read from the file*/ )
+	while ( fgets(str, 500, fp) != NULL) //파일에서 한줄씩 스케줄을 읽음 
 	{	
 		//fill code here -- generate genSchedInfo structure by genSchedInfo function
 		
@@ -48,16 +48,15 @@ int main(int argc, char *argv[]) {
 	}
 	
 	
-	//fill code here ---- close the file pointer
+	fclose(fp); //file pointer 닫기 
 	
-	printf("Read done! %i schedules are read\n", list_len(list));
+	printf("Read done! %i schedules are read\n", list_len(list)); //파일에서 기록된 스케줄 리스트의 총 개수 
 	
 	
 	//program starts
 	while(exit_flag == 0) 
 	{
-		//3. menu printing
-		//fill code here ---- 
+		//3. 5가지 menu printing
 		printf("1. print all the scheduleds\n");
 		printf("2. search for schedules in the month\n");
 		printf("3. search for schedules in th place\n");
@@ -65,11 +64,10 @@ int main(int argc, char *argv[]) {
 		printf("5. exit\n");
 		
 		//4. get option from keyboard
-		//fill code here ----
-		printf("select an options : ");
-		scanf("%d", &option);
+		printf("select an options : ");  
+		scanf("%d", &option); //위 5개 메뉴(옵션) 중에서 하 개의 옵션 입력받기
 		
-		switch(option)
+		switch(option) //5개 메뉴에 다른 각각의 조건문 작성하기 
 		{
 			case 1: //print all the schedules
 				printf("printing all the schedules in the scheduler.....\n\n\n");
@@ -86,7 +84,7 @@ int main(int argc, char *argv[]) {
 				
 				break;
 				
-			case 2:
+			case 2: //search for schedules in the month
 				printf("which month ? : ");
 				scanf("%i", &month);
 				
@@ -94,6 +92,8 @@ int main(int argc, char *argv[]) {
 				while (list_isEndNode(ndPtr) == 0)
 				{
 					//file code here -- print scheduling info elements matching to the month
+					sched_print(month); //입력받은 month에 대한 스케쥴 출력 
+					
 					ndPtr = list_getNextNd(ndPtr); //get the next node from the list
 					schedInfo = list_getNdObj(ndPtr); //get the object (scheduling info)
 					
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
 				
 				break;
 				
-			case 3:
+			case 3: //search for schedules in th place
 				printf("which place ? : ");
 				scanf("%s", place);
 				
@@ -110,6 +110,7 @@ int main(int argc, char *argv[]) {
 				while (list_isEndNode(ndPtr) == 0)
 				{
 					//file code here -- print scheduling info elements matching to the place
+					sched_print(place); //입력받은 place에 대한 스케쥴 출력 
 					ndPtr = list_getNextNd(ndPtr); //get the next node from the list
 					schedInfo = list_getNdObj(ndPtr); //get the object (scheduling info)
 					
@@ -118,11 +119,11 @@ int main(int argc, char *argv[]) {
 				
 				break;
 				
-			case 4:
+			case 4: //search for specific type schedule
 				printf("which type ?\n");
 				sched_printTypes();
 				printf("your choice : ");
-				scanf("%s", typeName);
+				scanf("%s", type);
 				
 				if (/* fill code here -- convert the type and check if the type is valid */)
 				{
@@ -130,6 +131,7 @@ int main(int argc, char *argv[]) {
 					while (list_isEndNode(ndPtr) == 0)
 					{
 						//file code here -- print scheduling info elements matching to the place
+						sched_print(type); //입력받은 type에 대한 스케쥴 출력 
 						ndPtr = list_getNextNd(ndPtr); //get the next node from the list
 						schedInfo = list_getNdObj(ndPtr); //get the object (scheduling info)
 						
@@ -142,7 +144,7 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 				
-			case 5:
+			case 5: //exit
 				printf("Bye!\n\n");
 				exit_flag = 1;
 				break;

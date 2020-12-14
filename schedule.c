@@ -65,9 +65,11 @@ void sched_print(void* obj)
 		printf("[ERROR] failed to print the schedule Info! (object is NULL)\n");
 	}
 	
+	printf("------------------------------------\n"); 
 	printf("Schedule Name : %s (%s)\n", schedPtr->name, type_string[schedPtr->type]);
 	printf("When : %s. %i\n", month_string[schedPtr->month], schedPtr->day);
 	printf("Where : %s\n", schedPtr->place);
+	printf("------------------------------------\n"); 
 	
 	return;
 }
@@ -84,13 +86,14 @@ void sched_print(void* obj)
 void* sched_genSchedInfo(char* name, char* place, int type, int month, int day)
 {
 	schedInfo_t* schedPtr;
+	int structure;
 	
 	//error handler
 	if (schedPtr == NULL) {
-		
+		printf("[ERROR] failed to make the structure of schedule Info!\n");
 	}
 	//allocate memory and set the member variables
-	
+	schedPtr = (schedInfo_t*)malloc(sizeof(schedInfo_t*));
 	
 	return (void*)schedPtr;
 }
