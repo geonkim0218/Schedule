@@ -86,7 +86,9 @@ void* sched_genSchedInfo(char* name, char* place, int type, int month, int day)
 	schedInfo_t* schedPtr;
 	
 	//error handler
-
+	if (schedPtr == NULL) {
+		
+	}
 	//allocate memory and set the member variables
 	
 	

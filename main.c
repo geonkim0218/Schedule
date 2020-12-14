@@ -38,7 +38,6 @@ int main(int argc, char *argv[]) {
 	
 	
 	
-	
 	//2. read from the file
 	while ( /* fill code here -- read from the file*/ )
 	{	
