@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
 				
 			case 3: //search for schedules in th place
 				printf("which place ? : ");
-				scanf("%s", place);
+				scanf("%s", &place);
 				
 				ndPtr = list;
 				while (list_isEndNode(ndPtr) == 0)
@@ -123,9 +123,9 @@ int main(int argc, char *argv[]) {
 				printf("which type ?\n");
 				sched_printTypes();
 				printf("your choice : ");
-				scanf("%s", type);
+				scanf("%s", &type);
 				
-				if (/* fill code here -- convert the type and check if the type is valid */)
+				if (sched_getType(type) == 0) /* fill code here -- convert the type and check if the type is valid */
 				{
 					ndPtr = list;
 					while (list_isEndNode(ndPtr) == 0)
